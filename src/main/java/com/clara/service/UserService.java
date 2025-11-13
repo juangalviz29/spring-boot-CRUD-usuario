@@ -58,8 +58,8 @@ public class UserService {
     @Transactional
     public UserResponseDTO buscarUser(Long id) {
         // findById devuelve un Optional (por si no existe)
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+        User user = userRepository.findById(id) //Este método busca en la base de datos un registro con el id que le pasas.
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));//Es una función lambda que crea y lanza una excepción personalizada con un mensaje que indica que el usuario no fue encontrado.
 
         // Convertimos la entidad a DTO de respuesta
         UserResponseDTO dto = new UserResponseDTO();
@@ -70,10 +70,11 @@ public class UserService {
         return dto;
     }
     @Transactional
-    public void eliminarUser(Long id) {
-        if (!userRepository.existsById(id)) {
+    public void eliminarUser(Long id) { //Este método revisa en la base de datos si existe un registro con ese id.
+        if (!userRepository.existsById(id)) { //Con el ! estás negando el resultado.
+                                              //Es decir, si el usuario NO existe, se ejecuta el bloque de adentro.
             throw new RuntimeException("No se puede eliminar. Usuario no encontrado con ID: " + id);
         }
-        userRepository.deleteById(id);
+        userRepository.deleteById(id); //Si el usuario existe, se procede a eliminarlo.
     }
 }
