@@ -1,0 +1,16 @@
+# | Configuración de la aplicación Clara
+server: 
+  port: 8080
+
+spring: # configuración de Spring Boot
+  aplication: 
+  name: clara # nombre de la aplicación
+  datasource: # configuración de la fuente de datos
+    url: jdbc:mysql://localhost:3306/clara # URL de conexión a la base de datos
+    username: root
+    password: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa: # configuración de JPA
+    hibernate: # configuración de Hibernate
+      dialect: org.hibernate.dialect.MySQL8Dialect # dialecto de MySQL 8
+    show-sql: true # muestra las consultas SQL en la consola
